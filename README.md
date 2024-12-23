@@ -9,8 +9,8 @@
 ## 과제 목록 📕
 ### Week 1
 - Git/Github 기초 학습 및 실습
-- [추후 추가될 과제들]
-
+- 제로초 HTML/CSS/Flex/Grid 강의 따라하기
+- Github 사이트 구현
 ### Week 2
 - [추후 추가될 과제들]
 <br>
@@ -25,9 +25,8 @@
 - 이름: 박서정
 - 학교: 서울대학교
 - 학과: 의류학과
-- 관심 분야: 웹
+- 관심 분야: Web, Computer graphics, Smart clothing
 - 이메일: ggaggu@snu.ac.kr
 - GitHub: Imggaggu
 
-### ⭐ 나의 각오
-피로그래밍 22기를 통해 [본인의 목표나 각오 작성]
+### ⭐ 후기
