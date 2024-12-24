@@ -73,6 +73,10 @@
             --color_shop: #9858f5;
             --color_shop_rgb: 152, 88, 245;
         }
+        /*편의를 위해 content 기준 width x, border 기준으로*/
+        *{
+            box-sizing:border-box;
+        }
         html,body {
             margin:0;
             padding:0;
@@ -81,7 +85,7 @@
             text-align:center;
         }
         #wrap-center {
-            width: 880px;
+            width: 1280px;
             display:inline-block;
             background-color: yellow;
         }
@@ -100,17 +104,31 @@
             text-align: left;
             position:relative;
         }
-        #header-hamburger{
+
+        /*헤더 햄버거 노티스 페이 공통요소 빼주기*/
+        #header-hamburger,  #header-naverpay, #header-notice{
             display:inline-block;
             position: absolute;
             top: 5px;
-            left: -12px;
             padding: 8px;
             background: none;
             border:none;
             cursor: pointer;
         }
-        #header-hamburger:hover::before{
+        /*햄버거*/
+        #header-hamburger{
+            left: -11px;
+        }
+        /*네이버페이*/
+        #header-naverpay{
+            left: 41px;
+        }
+        /*공지*/
+        #header-notice{
+            right: 42px;
+        }
+        
+        #header-hamburger:hover::before,#header-naverpay:hover::before,#header-notice:hover::before{
             position: absolute;
             content:'';
             left:0px;
@@ -120,16 +138,26 @@
             background-color: var(--color_option_bg);
             border-radius:50%;
         }
-
-        #header-hamburger > div {
+        #header-hamburger > div, #header-naverpay > div, #header-notice > div {
+            background-position: -312px -166px;
             background-image: url("../fornaver/sp_main.png");
             background-size: 463px 440px;
-            background-position: -311px -166px;
             background-repeat: no-repeat;
             position: relative;
             z-index: 1;
             width: 32px;
             height:32px;
+        }
+        #header-hamburger > div {
+            background-position: -312px -166px;
+        }
+
+        #header-naverpay > div {
+            background-position: -248px -260px;
+        }
+
+        #header-notice > div {
+            background-position: -311px -232px;
         }
     </style>
 </head> 
@@ -138,8 +166,23 @@
         <div id="wrap-center">
             <div id="header">
                 <button id="header-hamburger">
+                    <!-- ::before -->
                     <div></div>
                     <span class="blind">확장 영역</span>
+                    <!-- ::after -->
+                </button>
+
+
+                <button id="header-naverpay">
+                    <div></div>
+                    <span class="blind">네이버페이</span>
+                    
+                </button>
+
+
+                <button id="header-notice">
+                    <div></div>
+                    <span class="blind">알림</span>
                 </button>
                  </div>
             <div id="search"> </div>
