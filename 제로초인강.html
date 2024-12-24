@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="../for naver/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="../fornaver/favicon.ico">
     <title>NAVER</title>
     <style>
         html,body {
@@ -22,11 +22,22 @@
         #main {
             height:2000px;
         }
+        #header{
+            text-align: left;
+        }
         #header-hamburger{
+            display:inline-block;
             margin-top:5px;
-            background-color: blue;
-            width: 48px;
-            height:48px;
+            padding: 10px;
+        }
+        #header-hamburger > div {
+            background-image: url("../fornaver/sp_main.png");
+            background-size: 463px 440px;
+            background-position: -311px -166px;
+            background-repeat: no-repeat;
+           
+            width: 28px;
+            height:28px;
         }
     </style>
 </head> 
@@ -35,6 +46,7 @@
         <div id="wrap-center">
             <div id="header">
                 <div id="header-hamburger">
+                    <div></div>
                 </div>
                  </div>
             <div id="search"> </div>
