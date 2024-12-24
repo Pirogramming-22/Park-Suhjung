@@ -81,7 +81,7 @@
             text-align:center;
         }
         #wrap-center {
-            width: 1280px;
+            width: 880px;
             display:inline-block;
             background-color: yellow;
         }
@@ -90,28 +90,38 @@
         }
         #header{
             text-align: left;
+            position:relative;
         }
         #header-hamburger{
             display:inline-block;
-            margin-top:5px;
-            padding: 10px;
+            position: absolute;
+            top: 5px;
+            left: -12px;
+            padding: 8px;
             background: none;
             border:none;
             cursor: pointer;
         }
-        #header-hamburger:hover{
+        #header-hamburger:hover::before{
+            position: absolute;
+            content:'';
+            left:1px;
+            top:1px;
+            width:48px;
+            height:48px;
             background-color: var(--color_option_bg);
             border-radius:50%;
-
         }
+
         #header-hamburger > div {
             background-image: url("../fornaver/sp_main.png");
             background-size: 463px 440px;
             background-position: -311px -166px;
             background-repeat: no-repeat;
             
-            width: 28px;
-            height:28px;
+            
+            width: 32px;
+            height:32px;
         }
     </style>
 </head> 
