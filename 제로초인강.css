@@ -169,10 +169,14 @@ html,body,form {
 #search > form > input{
     width: 480px;
     height:100%; /* or 58px*/
-    padding: 17px;
+    padding: 17px 0px;
     border:none;
     outline:none;
-   
+    position: relative;
+    z-index: 10;
+    font-size: 1.4rem;
+    line-height: 24px;
+    font-weight: bold;
 }
 
 #cute-logo-forchristmas{
@@ -184,4 +188,51 @@ html,body,form {
     left: 0px;
     width: 578px;
     height:300px;
+}
+
+#search-svg{
+    display: inline-block;
+}
+
+#search-svg svg{
+    width:24px;
+    height:24px;
+}
+
+#search-right{
+    display: inline-block;
+}
+
+#search-keyboard::before{
+    content:"";
+    display: block;
+    background-image: url(../fornaver/sp_main.png);
+    background-size: 452px 436px;
+    background-position: -144px -298px;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 14px;
+}
+
+#search-recent::before{
+    content: "";
+    display: block;
+    background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
+    background-size: 452px 436px;
+    background-position: -154px -211px;
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 6px;
+}
+
+#search-button::before{
+    fill: #e41e39;
+    content: "";
+    display: inline-block;
+    background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
+    background-size: 452px 436px;
+    background-position: -405px -79px;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px
 }
