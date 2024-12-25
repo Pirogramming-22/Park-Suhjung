@@ -423,10 +423,45 @@ section[id^=main]{
     height:130px;
     margin-bottom: 16px;
 }
+/*뉴스스탠드*/
 #main-newstand{
     height: 426px;
     margin-bottom: 16px;
+    display:flex;
+    flex-flow: column;
 }
+#main-newstand-top{
+    flex:1;
+    padding:18px 20px;
+}
+#main-newstand-header{
+font-size: 1.6rem;
+color:rgba(8,8,8,.5);
+display:flex;
+justify-content:flex-start;
+}
+#main-newstand-header .bold{
+    font-weight:bold;
+    color:black;
+    }
+#main-newstand a{
+    text-decoration: none;
+}
+#main-newstand-gray{
+    display:flex;
+    justify-content:flex-start;
+}
+#main-newstand a:hover{
+    text-decoration: underline;
+}
+#main-newstand a{
+    color:inherit;
+}
+#main-newstand footer{
+    padding: 10px 0 11px
+}
+
+
 
 #main-login{
     height: 164px;
