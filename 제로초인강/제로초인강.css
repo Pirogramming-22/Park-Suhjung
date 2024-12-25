@@ -835,5 +835,24 @@ section footer .hot{
     color:var(--color_shop)
 }
 
+#main-shopping-grid{
+    display:grid;
+    grid-auto-flow:column;
+    grid-template-rows: 1fr 1fr 2fr;
+    height: 300px;
+    width:790px;
+}
+#main-shopping-grid >div {
+    display:grid;
+    grid-auto-flow:column;
+
+    grid-template-rows: 1fr 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto;
+    column-gap: 20px ;
+    row-gap: ;
+}
+.item:nth-child(1), .item:nth-child(3), .item:nth-child(5), .item:nth-child(7){
+    grid-row:1/ span 2;
+}
     
     
