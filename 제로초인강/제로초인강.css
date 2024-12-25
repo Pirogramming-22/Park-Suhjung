@@ -837,6 +837,7 @@ section footer .hot{
 
 #main-shopping-grid{
     display:grid;
+
     grid-auto-flow:column;
     grid-template-rows: 1fr 1fr 2fr;
     height: 300px;
@@ -845,14 +846,45 @@ section footer .hot{
 #main-shopping-grid >div {
     display:grid;
     grid-auto-flow:column;
-
-    grid-template-rows: 1fr 1fr 2fr;
+    grid-template-rows: 2fr 2fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr auto;
     column-gap: 20px ;
-    row-gap: ;
+    row-gap: 20px ;
 }
 .item:nth-child(1), .item:nth-child(3), .item:nth-child(5), .item:nth-child(7){
     grid-row:1/ span 2;
 }
     
+.item:nth-child(9), .item:nth-child(10),.item:nth-child(11)  {
+    padding: 10px 12px 5px;
+    border-radius: 4px;
+    background: rgba(96,96,96,.5);
+    background-color: var(--color_border_in);
+    border: 1px solid var(--color_border_in);
+    margin: 11px 0;
+
+}
+.item:nth-child(1), .item:nth-child(2),.item:nth-child(3),.item:nth-child(4), .item:nth-child(5),.item:nth-child(6),.item:nth-child(7), .item:nth-child(8),.item:nth-child(9) {
+    padding: 10px 12px 5px;
+    border-radius: 4px;
+ 
+    background-color: var(--color_border_in);
+    border: 1px solid var(--color_border_in);
+    margin: 11px 2px;
+
+}
+#main-shopping-grid .item{
+    line-height: 20px;
+    letter-spacing: -.8px;
+    font-size: 1.4rem;
+}
+#main-shopping-grid .item > .image{
+    width: 115px;
+    height: 115px;
+    border-radius: 4px;
+    background: rgba(96,96,96,.5);
     
+}
+
+#main-shopping-grid .item > .image{}
+     
