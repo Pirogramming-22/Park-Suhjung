@@ -424,17 +424,18 @@ section[id^=main]{
     margin-bottom: 16px;
 }
 /*뉴스스탠드*/
-#main-newstand{
+.left-section{
     height: 426px;
     margin-bottom: 16px;
     display:flex;
     flex-flow: column;
 }
-#main-newstand-top{
+#main-newstand-top,#main-shopping-top{
     flex:1;
     padding:18px 20px;
 }
-#main-newstand-top .dot::before{
+
+#main-newstand-top .dot::before, #main-shopping-top .dot::before{
     content:"";
     display: inline-block;
     width: 4px;
@@ -444,19 +445,20 @@ section[id^=main]{
     border-radius: 50%;
     vertical-align: 5px;
 }
-#main-newstand-top .dot{
+#main-newstand-top .dot, #main-shopping-top .dot{
     font-size: 1.6rem;
     font-weight: 800;
     color: rgba(8, 8, 8, .5);
 }
-#main-newstand-top .slash{
+#main-newstand-top .slash,#main-shopping-top .slash{
     position:relative;
     padding-left: 26px;
     font-size: 1.6rem;
     font-weight: 800;
     color: rgba(8, 8, 8, .5);
 }
-#main-newstand-top .slash::before{
+
+#main-newstand-top .slash::before,#main-shopping-top .slash::before{
     content:"";
     display: inline-block;
     position: absolute;
@@ -467,7 +469,8 @@ section[id^=main]{
     background-color: var(--color_dot_divider);
     transform: skewX(-15deg);
 }
-#main-newstand-header{
+
+#main-newstand-header,#main-shopping-header{
 font-size: 1.6rem;
 color:rgba(8,8,8,.5);
 display:flex;
@@ -475,13 +478,22 @@ justify-content:flex-start;
 line-height: 23px;
 margin-bottom: 17px;
 }
+
+#main-shopping-header .bold{
+    font-weight:bold;
+    color:black;
+    }
+
+
 #main-newstand-header .bold{
     font-weight:bold;
     color:black;
     }
-#main-newstand a{
+
+#main-newstand a,#main-shopping a{
     text-decoration: none;
 }
+
 
 #main-newstand-gray{
     display:flex;
@@ -494,6 +506,18 @@ margin-bottom: 17px;
     font-weight: 500;
     font-size: 1.4rem;
     line-height: 26px;
+}
+#main-shopping-gray{
+    display:flex;
+}
+#main-shopping-gray .left{
+    width:668px;
+    background:var(--color_option_bg);
+}
+#main-shopping-gray .right{
+    display:flex;
+    margin-left: auto;
+    padding:10px 0;
 }
 #main-newstand-gray .right{
     display:flex;
@@ -598,7 +622,7 @@ margin-bottom: 17px;
     color:inherit;
 }
 
-#main-newstand-footer{
+#main-newstand-footer, #main-shopping-footer{
     border-top: 1px solid var(--color_border_in);
     padding: 0 0 11px;
 }
@@ -682,9 +706,12 @@ border-top: 1px solid var(--color_border_in);
 
 #main-shopping{
     height:560px;
+    display:flex;
+    flex-flow:column;
 }
 
-#main-newstand-footer{
+/*뉴스*/
+#main-newstand-footer,#main-shopping-footer  {
     display:flex;
     justify-content: center;
     border-top: 1px solid #ebebeb;
@@ -697,7 +724,7 @@ border-top: 1px solid var(--color_border_in);
     font-size: 1.3rem;
     line-height: 35px;
     font-weight: 600;
-    position: relative;
+    
 }
 
 #main-newstand-footer .list,#main-newstand-footer .grid{
@@ -720,14 +747,14 @@ border-top: 1px solid var(--color_border_in);
     background-color: transparent;
     /*현재 네이버에 소스 안보임 ㅠㅠ*/
 }
-#main-newstand-footer .text{
+.left-section .text{
     padding: 0 16px;
 }
 #main-newstand-footer .news{
     color: var(--color_news);
 }
 
-#main-newstand-footer .prev{
+.left-section .prev{
     width: 36px;
     height: 36px;
     border: 1px solid #dadcdf;
@@ -742,11 +769,11 @@ border-top: 1px solid var(--color_border_in);
     vertical-align: top;
     cursor: pointer;
 }
-#main-newstand-footer .prev::before{
+.left-section .prev::before{
   
     transform: rotate(180deg);
 }
-#main-newstand-footer .next::before,#main-newstand-footer .prev::before{
+.left-section .next::before,.left-section .prev::before{
     color: var(--color_news);
     content: "";
     display: block;
@@ -763,8 +790,26 @@ border-top: 1px solid var(--color_border_in);
     height: 12px;
     margin: auto;
 }
+.left-section .next2::before,.left-section .prev2::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    transform: translate(-50%, -50%) rotate(45deg);
+    margin-left: -2px;
+    border-top: 2px solid #80868c;
+    border-right: 2px solid #80868c;
+    margin-left: -1px;
+    background-image: url(https://pm.pstatic.net/resources/asset/sp_main.eae24523.png);
+    background-size: 452px 436px;
+    background-position: -193px -424px;
+    background-repeat: no-repeat;
+}
 
-#main-newstand-footer .next{
+
+.left-section .next{
     width: 36px;
     height: 36px;
     border: 1px solid #dadcdf;
@@ -780,9 +825,14 @@ border-top: 1px solid var(--color_border_in);
     cursor: pointer;
 }
 
-#main-newstand-footer .total{
+.left-section.total{
     color: rgba(96,96,96,.5);
     
+}
+
+/*쇼핑*/
+section footer .hot{
+    color:var(--color_shop)
 }
 
     
