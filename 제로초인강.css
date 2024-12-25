@@ -154,7 +154,7 @@ html,body,form {
 
 /*for 검색창*/
 #search > form{
-    display: inline-block;
+    display: inline-flex;
     width: 708px;
     height: 58px;
     border-radius: 33px;
@@ -191,7 +191,9 @@ html,body,form {
 }
 
 #search-svg{
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #search-svg svg{
@@ -200,7 +202,16 @@ html,body,form {
 }
 
 #search-right{
-    display: inline-block;
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    justify-content: flex-end;
+}
+
+#search-keyboard,#search-recent, #search-button{
+    background: transparent;
+    border:none;
+    cursor:pointer;
 }
 
 #search-keyboard::before{
@@ -234,5 +245,6 @@ html,body,form {
     background-position: -405px -79px;
     background-repeat: no-repeat;
     width: 25px;
-    height: 25px
+    height: 25px;
+ 
 }
