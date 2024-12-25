@@ -78,7 +78,7 @@ html,body,form {
 #wrap-center {
     width: 1280px;
     display:inline-block;
-    background-color: yellow;
+    background-color: white;
 }
 #main {
     height:2000px;
@@ -170,6 +170,7 @@ html,body,form {
 #search > form:hover {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.12)
 }
+
 
 #search > form > input{
     width: 480px;
