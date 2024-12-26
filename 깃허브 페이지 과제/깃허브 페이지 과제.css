@@ -1,0 +1,170 @@
+html,body {
+    margin:0;
+    padding:0;
+    font-size: 16px;
+    font-family: sans-serif;
+    align-items: center
+    
+}
+form{
+    margin:0;
+    padding:0;
+}
+.fillwhite {
+    display: inline-block;
+    overflow: visible !important;
+    vertical-align: text-bottom;
+    fill: white;
+}
+
+.blind{
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+}
+#wrap{
+    background-color: rgb(43, 45, 52);
+}
+#headline{
+    text-align:center;
+    width: 1280px;
+    display:flex;
+    background-color: rgb(43, 45, 52);
+    padding: 10px;
+}
+#main{
+    text-align:center;
+    width: 1280px;
+    height: 600px;
+    display:flex;
+    padding: 10px;
+}
+
+#main-left{
+    text-align:center;
+    padding: 300px 100px 300px 250px;
+    display:inline-block;
+    text-align:center;
+}
+
+#headline-left{
+    margin-top: -20px;
+    margin-left:100px;
+    display:inline-block;
+}
+#headline-right{
+    margin-top: 30px;
+    margin-left:250px;
+    display: inline-block;
+}
+
+
+#octicons{
+    content: "";
+    display: inline-block;
+    background-image: url(../../forgithub/Octicons-mark-github.svg);
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
+
+#nav{
+    margin-top: 50px;
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    font-size: 1.4rem;
+    line-height: 20px;
+    padding:0;
+    margin-left: 1px;
+}
+#nav li{
+    width:auto;
+    margin-left: -20px;
+    display: inline-block;
+    padding-right:40px;
+    
+}
+
+#nav button{
+    display:inline-block;
+    background-color: transparent;
+    border: none;
+    text-align: justify;
+}
+
+#nav button div{
+    
+    height: 10px;
+    margin:0  auto;
+    position: relative;
+    text-align:center;
+
+}
+
+#nav button {
+    font-size: 1.2rem;
+    color:white;
+    display:flex;
+    justify-content:flex-start;
+    line-height: 23px;
+    margin-bottom: 17px;
+    }
+
+
+#search > form{
+    display: inline-flex;
+    width: 250px;
+    height: 40px;
+    border: none;
+    background-color: gray;
+    position:relative;
+    z-index:30;
+}
+
+#search > form > input{
+    width: 200px;
+    height:100%; 
+    padding: 0 8px;
+    border:none;
+    outline:none;
+    position: relative;
+    z-index: 10;
+    font-size: 1.2rem;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+#headline{
+    position: absolute;
+    right: 0;
+    left: 0;
+}
+
+#slash{
+    content:"";
+    display: inline-block;
+    position: absolute;
+    top: 4px;
+    left: 13px;
+    width: 1px;
+    height: 15px;
+    background-color: whitesmoke;
+    transform: skewX(-15deg);
+}
+#footer{
+    display:flex
+}
+#footer > div {
+    background-position: -312px -166px;
+    background-image: url("../../forgithub/footer.png");
+    background-size: 463px 440px;
+    background-repeat: no-repeat;
+    display:block;
+    width : auto;
+    height: auto;
+
+}
