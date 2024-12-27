@@ -49,8 +49,8 @@ html, body{
 
 body{
     display:block;
-    max-width:1300px;
-    height:auto;
+    max-width:1500px;
+    min-height: 100vh;
     background-color: #000;
    
 }
@@ -58,8 +58,8 @@ body{
 
 
 #wrap{
-    height: flex;
-    max-width:1300px;
+    min-height: 100vh;
+    height:fit-content;
     padding:10px 40px  0 40px;
 }
 /*header*/
@@ -77,8 +77,8 @@ body{
 }
 
 #header :nth-child(1){
-    width:70px;
-    height:70px;
+    width:50px;
+    height:50px;
 }
 #header :nth-child(2){
     flex:1;
@@ -129,23 +129,11 @@ body{
     color: #0bec12;
 }
 
-#main{
-    display: flex;
-    
-}
+
 
 .flex-container{
     display:inline-flex;
     text-align:center;
-}
-.flex-grid{
-    background-color: black;
-    gap:10px;
-    padding:0px;
-    border-radius:5%;
-    grid-gap: 1px;
-    background-color: var(--color_border_in);
-    grid-template-rows: 56px 56px 56px 56px;
 }
 
 #main-header{
@@ -153,7 +141,7 @@ body{
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     height: 40px;
     width:100%;
-    margin: 70px 10px  0 10px;
+    margin: 70px 10px  40px 10px;
     gap: 10px;
     align-items: center;
     justify-content: space-between;
@@ -206,8 +194,6 @@ body{
     padding:20px;
     width:100%;
     display: flex;
-   
-
 }
 #header-hamburger{
     position: absolute;
@@ -240,56 +226,219 @@ body{
     transition: 0.3s;
 }
 
+.flex-box-portfolio:hover {
+    content: "";
+    position: relative;
+    top: -2px;   
+}
+.flex-box-portfolio:hover .profileimg {
+    transform: scale(1.1);
+    
+}
+.flex-box-portfolio:hover .wrap-portfolio-hamburger  :nth-child(1){
+    width:35%;
+    transition: 0.15s;
+}
+.flex-box-portfolio:hover .wrap-portfolio-hamburger  :nth-child(3){
+    width:35%;
+    margin-left: auto;
+    transition: 0.15s;
+}
 
-
-
-
-/*interview grid*/
+/*portfolio grid*/
 .flex-grid{
-    display:grid;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 20px;
-    grid-gap: var(--gutter);
-    margin-bottom: var(--offset);
-  }
+    flex-direction: column;
 
-  .flex-items {
+    align-items: center;
+    text-align: center;
+    padding-top: var(--offset);
+    width: 100%;
+    
+    border-radius: 10px;
+    padding: var(--gutter);
+    display: flex;
+    gap: 10px;
+   
+    cursor: url(./cursor.png), auto;
+    position: relative;
+}
+ 
+ 
+ 
+
+
+  .flex-box-portfolio {
     background-color: var(--bg-gray);
     border-radius: 10px;
     padding: var(--gutter);
-    cursor: pointer;
+    width:100%;
     position: relative;
     border: 0;
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    height: flex;
+    font-size: var(--body1);
+    border-radius: 5px;
+    color: var(--white);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
+
+  /*프로필 박스 꾸미기*/
+
+.portfolio-profileimg{
+    width: 60px;
+    height:60px;
+    
+}
+.profileimg{
+     
+     width: 90%;
+     height:120px;
+     border-radius: 10%;
+     object-fit: cover;
+     transition: 0.3s;
+
+  }
+
+.profileimgforlarge{
+     
+     width: 170px;
+     height:120px;
+     border-radius: 10%;
+     object-fit: cover;
+     transition: 0.3s;
+
+  }
+.portfolio-namecard{
+    gap: 10px;
+    align-items: center;
+    justify-content: start;
+    padding: 0;
+    flex-flow:row;
+    display: flex;   
+    padding: 6px 8px;
+    
+}
+.portfolio-namecard > div{
+    padding:8px;
+    background-color:#c6c6c6;
+    border-radius: 10%;
+    font-size: var(--body2);
+}
+.portfolio-namecard :nth-child(1){
+    padding:8px;
+    background-color: #2188b6;
+    border-radius: 10%;
+    font-size: var(--body2);
+}
+
+.portfolio-namecard2{
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-flow:row;
+    display: flex;   
+    padding: 6px 8px;
+    
+}
+.portfolio-namecard2 > div{
+    padding:8px;
+    background-color:#c6c6c6;
+    border-radius: 10%;
+    font-size: var(--body2);
+}
+.portfolio-namecard2 :nth-child(1){
+    padding:8px;
+    background-color: #2188b6;
+    border-radius: 10%;
+    font-size: var(--body2);
+}
+
+
+.larger-box{
+    width:100%;
+    margin: 0 10px  0 10px;
+    gap: 10px;
+    align-items: center;
+    justify-items: start;
+    padding: 0;
+    flex-flow: row;
+    display: flex;
+    gap:50px;
+}
+
+.larger-details >div {
+    margin:10px;
+ 
+}
+.larger-details >:nth-child(1) {
+    font-weight:bolder;
+    font-size: 2rem;
+}
+.larger-details >:nth-child(2) {
+  
+    margin-bottom: 20px;
+}
+
+.smaller-box{
+  
+    align-items: center;
+    justify-items: start;
+    padding: 0;
+    flex-flow: column;
+    display: flex;
+    gap:20px;
+
+}
+.title{
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+/*portfolio 햄버거*/
+.wrap-portfolio-hamburger{
+    width: 20px;
+    height:20px;
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    margin: 10px; 
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+}
+.portfolio-hamburger{
+    width:30px;
+    height:3px;
+    background-color: #fff;
+    display:flex;
+}
+.wrap-portfolio-hamburger  :nth-child(1){
+    width:100%
+}
+.wrap-portfolio-hamburger  :nth-child(2){
+    width:100%
+}
+.wrap-portfolio-hamburger :nth-child(3){
+    width:100%
+}
+
 /*grid 배열 변화주기*/
-@media (max-width: 1300px ) {
-    .flex-grid{
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .flex-container{
-        
-    }
+@media (max-width: 1500px ) {
+
 
 }
 
 @media (max-width: 800px) {
-    .flex-grid{
-        grid-template-columns: repeat(2, 1fr);
 
-    }
     #nav{
         display: none;
     }
 
-    .flex-container{
-
-    }
     
 }
 /*min780*/
@@ -302,15 +451,20 @@ body{
     }
 }
 
-@media (max-width: 580px) {
-    .flex-grid{
-        grid-template-columns: repeat(1, 1fr);
+@media (min-width: 580px) {
+    .smaller-box{
+        display:none;
     }
+}
 
+
+@media (max-width: 580px) {
+    .larger-box{
+        display:none;
+    }
     #nav{
         display: none;
     }
 
 }
 
-/*hover 변화주기*/
