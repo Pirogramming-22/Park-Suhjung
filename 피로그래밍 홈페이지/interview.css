@@ -250,8 +250,7 @@ body{
     width:35%;
     transition: 0.15s;
 }
-.flex-box-interview:ho
-ver .wrap-interview-hamburger  :nth-child(3){
+.flex-box-interview:hover .wrap-interview-hamburger  :nth-child(3){
     width:35%;
     margin-left: auto;
     transition: 0.15s;
