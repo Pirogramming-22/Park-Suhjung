@@ -17,28 +17,23 @@ def check_num():
         break
     return(num_of_nums)
 
-def play_a():
-    global num 
-    nums=check_num()
+def brGame(player):
+    global num
+    nums = check_num()
 
-    for i in range (num,num+nums):
-        print(f"playerA : {i+1}")
-        if i + 1 == 31: 
-            print("playerA win!")
-    num=num+nums
+    for i in range(num, num + nums):
+        print(f"{player} : {i + 1}")
+        if i + 1 == 31:  
+            print(f"{player} wins!")
+            return True  
+    num += nums  
+    return False
 
 
-def play_b():
-    global num 
-    nums=check_num()
 
-    for i in range (num,num+nums):
-        print(f"playerB : {i+1}")
-        if i + 1 == 31: 
-            print("playerB win!")
-    num=num+nums
-
-while num<31:
-    play_a()
-    if num<31:
-        play_b()
+while num < 31:
+    if brGame("playerA"):  
+        break
+    if num < 31:  
+        if brGame("playerB"):  
+            break
