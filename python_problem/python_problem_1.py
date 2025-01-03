@@ -18,7 +18,13 @@ def check_num():
     return(num_of_nums)
 
 
-num=check_num()
+nums=check_num()
 
-for i in range (num):
-    print(f"playerA : {i}")
+for i in range (num,num+nums):
+    print(f"playerA : {i+1}")
+
+num=num+nums
+nums=check_num()
+
+for i in range (num,num+nums):
+    print(f"playerB : {i+1}")
