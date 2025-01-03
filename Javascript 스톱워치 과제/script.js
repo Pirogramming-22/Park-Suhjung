@@ -114,3 +114,5 @@ deleteIcon.addEventListener('click', function() {
 
     selectAllCheckbox.checked = false;
 });
+
+
