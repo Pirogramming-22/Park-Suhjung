@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Sixtyfour&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Press+Start+2P&family=Sixtyfour&family=Syne+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Keania+One&family=Noto+Sans+KR:wght@100..900&family=Press+Start+2P&family=Sixtyfour&family=Syne+Mono&family=Wallpoet&display=swap" rel="stylesheet">
+
+<body>
+    <div>
+        <h2 class="sixtyfour-special">PIROTIMER</h2>
+        <div class="timer keania-one-regular">
+            <div class="screen">
+                <p class="time">00:00</p>
+            </div>
+            <div class="btn">
+                <button class="btn_start press-start-2p-regular" onclick="Start()">START</button>
+                <button class="btn_stop press-start-2p-regular" onclick="Stop()">STOP</button>
+                <button class="btn_reset press-start-2p-regular" onclick="Clear()">RESET</button>
+            </div>
+        </div> 
+        <div class="record">
+
+           
+            <div class="timer keania-one-regular">
+                <div class="record-header" >
+                    <input type="checkbox" class="select-all-checkbox" id="select-all">
+                    <h2 class="title press-start-2p-regular">Record</h2>
+                    <button class="delete-icon">🗑️</button>
+                </div>
+                <div class="screen">
+                    <div class="record-list">
+                    </div>   
+                </div>
+
+            </div> 
+
+            
+        </div>
+    </div>
+
+
+    
+</body>
+</html>
