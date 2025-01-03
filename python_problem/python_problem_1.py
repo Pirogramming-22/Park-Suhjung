@@ -17,14 +17,30 @@ def check_num():
         break
     return(num_of_nums)
 
+def play_a():
+    global num 
+    nums=check_num()
 
-nums=check_num()
+    for i in range (num,num+nums):
+        print(f"playerA : {i+1}")
+        if i + 1 == 31:
+            break 
+            
+    num=num+nums
 
-for i in range (num,num+nums):
-    print(f"playerA : {i+1}")
 
-num=num+nums
-nums=check_num()
+def play_b():
+    global num 
+    nums=check_num()
 
-for i in range (num,num+nums):
-    print(f"playerB : {i+1}")
+    for i in range (num,num+nums):
+        print(f"playerB : {i+1}")
+        if i + 1 == 31: 
+            break
+            
+    num=num+nums
+
+while num<31:
+    play_a()
+    if num<31:
+        play_b()
