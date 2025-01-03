@@ -15,4 +15,10 @@ def check_num():
 
 
         break
-check_num()
+    return(num_of_nums)
+
+
+num=check_num()
+
+for i in range (num):
+    print(f"playerA : {i}")
