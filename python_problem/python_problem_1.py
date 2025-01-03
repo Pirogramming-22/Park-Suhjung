@@ -23,9 +23,8 @@ def play_a():
 
     for i in range (num,num+nums):
         print(f"playerA : {i+1}")
-        if i + 1 == 31:
-            break 
-            
+        if i + 1 == 31: 
+            print("playerA win!")
     num=num+nums
 
 
@@ -36,8 +35,7 @@ def play_b():
     for i in range (num,num+nums):
         print(f"playerB : {i+1}")
         if i + 1 == 31: 
-            break
-            
+            print("playerB win!")
     num=num+nums
 
 while num<31:
