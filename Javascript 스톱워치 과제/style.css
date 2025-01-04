@@ -1,0 +1,153 @@
+
+:root{
+    --timer_color: #292929;
+    --screen_color: #c2c2c2;
+    --text_color:#2d2d2d;
+    --outline_color:#292929;
+}
+
+
+
+/*font*/
+.sixtyfour-special {
+    font-family: "Sixtyfour", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "BLED" 0,
+      "SCAN" 0;
+    color: yellow;
+  }
+
+.press-start-2p-regular {
+    font-family: "Press Start 2P", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+.keania-one-regular {
+    font-family: "Keania One", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+body {
+    font-family: Arial, sans-serif;
+    margin:50px 0;
+    padding: 0;
+    background-color:darkred;
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.timer{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color:var(--timer_color);
+    border:var(--timer_color) solid 6px ;
+    border-radius: 3px;
+}
+.btn{
+    margin: 20px;
+    border:var(--timer_color) solid 3px ;
+    
+    
+}
+.btn >button{
+    padding: 5px;
+    margin: 0 5px;
+}
+
+.screen{
+    font-size: 50px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color:var(--screen_color);
+    border-radius:5px;
+}
+
+.record{
+    margin-top: 50px;
+}
+.title{
+    color: var(--screen_color);
+}
+
+.record-list{
+    font-size: 20px;
+    min-height: 100px;
+}
+
+.record-item {
+    
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.record-checkbox {
+    margin-right: 80px;
+    margin-left: 26px;
+    
+}
+.record-checkbox:checked{
+    background-color: #292929;
+}
+
+.record-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.record-header> h2{
+    margin: 37px;
+}
+.record-header> button{
+    background-color: transparent;
+    border: none;
+}
+.record-header> button:hover{
+    transform: scale(1.1);
+
+}
+
+
+
+.gif-container {
+   
+    transform: translate(0, -50%);
+    width: 100px;
+    height: 100px;
+}
+
+.gif-image {
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: none;
+   
+}
+
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(0);
+        
+    }
+    50% {
+        transform: translateX(230px);
+       
+    }
+}
+.gif-container {
+    animation: bounce 4s infinite;
+}
