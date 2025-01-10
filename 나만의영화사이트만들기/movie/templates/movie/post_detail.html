@@ -34,9 +34,10 @@
             </a>
 
            
-            <a href="{% url 'movie:review_delete' pk=review.pk %}">
+            <form method="POST" action="{% url 'movie:review_delete' pk=review.pk %}">
+                {% csrf_token %}
                 <button>삭제</button>
-            </a>
+            </form>
     </main>
 </body>
 </html>
