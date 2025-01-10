@@ -35,19 +35,21 @@ def post_detail(request, pk):
 
 def review_edit(request, pk):
     review = Post.objects.get(id=pk)
+    
     if request.method == "POST":
-        review.title = request.POST['title'],
-        review.year = int(request.POST['year']),
-        review.genre = request.POST['genre'],
-        review.star = int(request.POST['star'][0]),
-        review.running_time = request.POST['running_time'],
-        review.text = request.POST['text'],
-        review.pd = request.POST['pd'],
+        review.title = request.POST['title']
+        review.year = int(request.POST['year'])
+        review.genre = request.POST['genre']
+        review.star = int(request.POST['star'][0])  # [0]으로 첫 번째 값만 받는다면, 값이 하나일 경우에는 이 방식으로 유지
+        review.running_time = request.POST['running_time']
+        review.text = request.POST['text']
+        review.pd = request.POST['pd']
         review.actors = request.POST['actors']
         review.save()
-        
+
         return redirect('movie:post_detail', pk=review.pk)
-    return render(request, 'movie/review_edit.html',{'review':review})
+    
+    return render(request, 'movie/review_edit.html', {'review': review})
 
 def review_delete(request, pk):
 
