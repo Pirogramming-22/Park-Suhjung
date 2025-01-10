@@ -32,3 +32,11 @@ ul{
 .review_block{
     margin-left: 50px;
 }
+
+.edit_post{
+    display: flex; 
+   
+    padding: 10px 20px; 
+    background-color: #f4f4f4; 
+    flex-direction: column;
+}

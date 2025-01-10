@@ -9,8 +9,8 @@
 </head>
 <body>
     <header>
-        <h1><a href="{% url 'review_list' %}">My movie reviews</a></h1>
-        <button>Add a New review</button>
+        <h1><a href="{% url 'movie:review_list2' %}">My movie reviews</a></h1>
+        <a href="{% url 'movie:create_post' %}">Add a New review</a>
     </header>
     <main>
         {% block content %}
@@ -28,6 +28,15 @@
             </div>
         </div>
         {% endblock %}
+        
+            <a href="{% url 'movie:review_edit' pk=review.pk %}">
+                <button>수정</button>
+            </a>
+
+           
+            <a href="{% url 'movie:review_delete' pk=review.pk %}">
+                <button>삭제</button>
+            </a>
     </main>
 </body>
 </html>
