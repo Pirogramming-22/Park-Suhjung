@@ -44,8 +44,8 @@ def review_edit(request, pk):
         review.text = request.POST['text'],
         review.pd = request.POST['pd'],
         review.actors = request.POST['actors']
-
         review.save()
+        
         return redirect('movie:post_detail', pk=review.pk)
     return render(request, 'movie/review_edit.html',{'review':review})
 
