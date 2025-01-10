@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/movie_review.css"/>
+    <title>My movie reviews</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'review_list' %}">My movie reviews</a></h1>
+        <button>Add a New review</button>
+    </header>
+    <main>
+        {% block content %}
+        <div class="detail">
+            <div class="review_block">
+                <p>작성일자: {{ review.published_date }}</p>
+                <h3><a href="">{{ review.title }}</a></h3>
+                <h5>개봉년도:{{review.year}}</h5>
+                <h5>장르:{{review.genre}}</h5>
+                <h5>별점:{{review.star}}</h5>
+                <h5>감독:{{review.pd}}</h5>
+                <h5>주연:{{review.actors}}</h5>
+                <h5>러닝타임:{{review.running_time}}</h5>
+                <div>리뷰:{{review.text}}</div>
+            </div>
+        </div>
+        {% endblock %}
+    </main>
+</body>
+</html>
