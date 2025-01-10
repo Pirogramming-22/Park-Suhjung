@@ -47,7 +47,7 @@ def review_edit(request, pk):
 
         review.save()
         return redirect('movie:post_detail', pk=review.pk)
-    return render(request, 'movie:review_list2',{'review':review})
+    return render(request, 'movie/review_edit.html',{'review':review})
 
 def review_delete(request, pk):
 
