@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/movie_review.css"/>
+    <title>My movie reviews</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'movie:review_list2' %}">My movie reviews</a></h1>
+        <a href="{% url 'movie:create_post' %}">Add a New review</a>
+    </header>
+
+
+
+    <!-- POST 방식으로 데이터를 전송하는 폼 -->
+   
+  
+        <div class="edit_post">
+            <h2>리뷰 수정</h2>
+            <form method="POST">
+                {% csrf_token %}
+                
+            
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" value="{{ review.title }}" required>
+
+                
+                <label for="year">개봉년도</label>
+                <input type="number" id="year" name="year" value="{{ review.year }}" required>
+
+            
+                <label for="genre">장르</label>
+                <select id="genre" name="genre" required>
+                    <option value="액션" {% if review.genre == "액션" %}selected{% endif %}>액션</option>
+                    <option value="드라마" {% if review.genre == "드라마" %}selected{% endif %}>드라마</option>
+                    <option value="코믹" {% if review.genre == "코믹" %}selected{% endif %}>코믹</option>
+                    <option value="호러" {% if review.genre == "호러" %}selected{% endif %}>호러</option>
+                    <option value="로맨스" {% if review.genre == "로맨스" %}selected{% endif %}>로맨스</option>
+                    <option value="SF" {% if review.genre == "SF" %}selected{% endif %}>SF</option>
+                </select><br><br>
+
+                
+                <label for="star">별점:</label>
+                <input type="number" id="star" name="star" value="{{review.star}}" min="0" max="5" step="0.1" required><br><br>
+                
+                <label for="running_time">러닝타임</label>
+                <input type="text" id="running_time" name="running_time" value="{{ review.running_time }}" required><br><br>
+
+            
+                <label for="pd">감독</label>
+                <input type="text" id="pd" name="pd" value="{{ review.pd }}" required><br><br>
+
+                
+                <label for="actors">주연</label>
+                <input type="text" id="actors" name="actors" value="{{ review.actors }}" required><br><br>
+
+            
+                <label for="text">리뷰 내용</label><br>
+                <textarea id="text" name="text" rows="5" required>{{ review.text }}</textarea><br><br>
+
+            
+                <button type="submit"><a href="{% url 'movie:post_detail' pk=review.pk %}">제출하기</a></button>
+            </form>
+            
+
+        </div>
+    
+           
+          </form>     
+    
+            <a href="{% url 'movie:post_detail' pk=review.pk %}">
+                <button>취소</button>
+            </a>
+        </div>
+ 
+ 
+    
+    <br>
+    <a href="{% url 'movie:review_list2' %}">리뷰 목록으로 돌아가기</a>
+
+</body>
+</html>

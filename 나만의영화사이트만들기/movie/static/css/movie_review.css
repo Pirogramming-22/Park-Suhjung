@@ -1,0 +1,42 @@
+header{
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px; 
+    background-color: #f4f4f4; 
+    flex-direction: row;
+}
+header h1 a {
+    text-decoration: none; 
+    color: #333; 
+}
+header h1 {
+    margin: 0; 
+    font-size: 1.5rem; 
+}
+header button {
+    padding: 10px 15px; 
+    font-size: 1rem;
+    background-color:transparent;
+    border: none; 
+ 
+}
+
+ul{
+    display: flex; 
+    align-items: center; 
+    padding: 10px 20px; 
+    background-color: #f4f4f4; 
+    flex-direction: row;
+}
+.review_block{
+    margin-left: 50px;
+}
+
+.edit_post{
+    display: flex; 
+   
+    padding: 10px 20px; 
+    background-color: #f4f4f4; 
+    flex-direction: column;
+}
