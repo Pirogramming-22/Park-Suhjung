@@ -12,9 +12,10 @@
     nightDayHandler(this);
   ">
   <ol id="nav">
-    <li><a href="#!html" onclick="fetchPage('html')">html</a></li>
+   <!--<li><a href="#!html" onclick="fetchPage('html')">html</a></li>
     <li><a href="#!css" onclick="fetchPage('css')">css</a></li>
     <li><a href="#!javascript" onclick="fetchPage('javascript')">javascript</a></li>
+  --> 
   </ol>
   <article></article>
 
@@ -31,6 +32,21 @@
     } else {
       fetchPage('welcome');
     }
+    fetch('list').then(function(response){
+    response.text().then(function(text){
+      var items = text.split(',');
+      var i = 0;
+      var tags = '';
+      while(i<items.length){
+        var item = items[i];
+        item = item.trim();
+        var tag = '<li><a href="#!'+item+'" onclick="fetchPage(\''+item+'\')">'+item+'</a></li>';
+        tags = tags + tag;
+        i = i + 1;
+      }
+      document.querySelector('#nav').innerHTML = tags;
+    })
+  });
     </script>
 
 
