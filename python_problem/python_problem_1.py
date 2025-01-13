@@ -27,6 +27,7 @@ def player():
         print(f"player : {i+1}")
         if i + 1 == 31: 
             print("player wins!")
+            break
     num=num+nums
 
 
@@ -38,6 +39,7 @@ def computer():
         print(f"computer : {i+1}")
         if i + 1 == 31: 
             print("computer wins!")
+            break
     num=num+nums
 
 while num<31:
