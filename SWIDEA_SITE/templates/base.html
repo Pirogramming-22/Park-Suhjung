@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SWIDEA_SITE{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'idea_list' %}">아이디어 목록</a></li>
+            <li><a href="{% url 'devtool_list' %}">개발 도구</a></li>
+            <li><a href="{% url 'admin:index' %}">관리자</a></li>
+        </ul>
+    </nav>
+
+    <!-- 페이지 콘텐츠 -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- 공통 자바스크립트 -->
+    <script src="{% static 'scripts.js' %}"></script>
+</body>
+</html>

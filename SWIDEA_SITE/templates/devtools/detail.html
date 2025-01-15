@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ devtool.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ devtool.name }}</h1>
+<p><strong>종류:</strong> {{ devtool.kind }}</p>
+<p><strong>설명:</strong> {{ devtool.content }}</p>
+
+<a href="{% url 'devtool_update' devtool.pk %}" class="btn btn-primary">수정</a>
+<form action="{% url 'devtool_delete' devtool.pk %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">삭제</button>
+</form>
+<a href="{% url 'devtool_list' %}" class="btn btn-secondary">목록으로 돌아가기</a>
+{% endblock %}

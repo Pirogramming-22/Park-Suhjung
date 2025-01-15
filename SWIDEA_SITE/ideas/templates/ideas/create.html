@@ -1,0 +1,17 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}아이디어 등록{% endblock %}
+
+{% block content %}
+<h1>아이디어 등록</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">등록</button>
+</form>
+
+<a href="{% url 'idea_list' %}" class="btn btn-secondary">목록으로 돌아가기</a>
+{% endblock %}
