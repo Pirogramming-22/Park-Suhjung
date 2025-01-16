@@ -71,8 +71,9 @@ def toggle_star(request, pk):
             is_starred = False
         else:
             is_starred = True
-        wishlist=is_starred
-        return JsonResponse({'is_starred': is_starred},{'wishlist':wishlist})
+
+        return JsonResponse({'is_starred': is_starred},)
+    
 def adjust_interest(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
     adjustment = int(request.POST.get('adjustment', 0))
