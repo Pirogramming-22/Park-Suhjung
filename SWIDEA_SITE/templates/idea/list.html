@@ -27,7 +27,7 @@
         <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="1">+</button>
         <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="-1">-</button>
         <button class="like-btn" data-id="{{ idea.pk }}">
-            {% if user in idea.ideastar_set.values_list('user', flat=True) %}
+            {% if is_starred %}
             ★
             {% else %}
             ☆

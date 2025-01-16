@@ -22,12 +22,14 @@ class Idea(models.Model):
     thumbnail = models.ImageField(upload_to='ideas/thumbnails/', blank=True, null=True)
     content = models.TextField(default="입력하세요")
     interest = models.PositiveIntegerField(default=0)
-    is_starred = models.BooleanField(default=False)  # 찜 상태
+    
     devtool = models.ForeignKey(DevTool, on_delete=models.CASCADE, related_name='ideas',default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    wishlist = models.BooleanField(default=False)  # 찜 여부 추가
+    #wishlist = models.BooleanField(default=False)  # 찜 여부 추가
     #wishlist = models.ManyToManyField(User, related_name='starred_ideas', blank=True)  # 추가
+        
+    
     @property
     def likes(self):
         """찜한 개수를 반환"""
@@ -60,6 +62,7 @@ class Idea(models.Model):
 class IdeaStar(models.Model):
     idea = models.ForeignKey(Idea, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    is_starred = models.BooleanField(default=False)  # 찜 상태
 
     class Meta:
         unique_together = ('idea', 'user')  # 유저가 하나의 아이디어에만 한 번 찜 가능
