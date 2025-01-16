@@ -1,59 +1,237 @@
-
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}아이디어 관리{% endblock %}
 
 {% block content %}
-<h1>아이디어 관리</h1>
+<style>
+/* 스타일 정의 */
 
-<!-- 정렬 옵션 -->
-<div>
-    <a href="?sort=created_at">등록순</a>
-    <a href="?sort=likes">찜하기순</a>
-    <a href="?sort=name">이름순</a>
-    <a href="?sort=updated_at">최신순</a>
-</div>
+/* 카드 그리드 컨테이너 */
+.idea-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
+    gap: 20px;
+    padding: 20px;
+    
+}
 
-<!-- 아이디어 목록 -->
-<div>
-    {% for idea in page_obj %}
-    <div>
-        {% if idea.thumbnail %}
-        <img src="{{ idea.thumbnail.url }}" alt="아이디어 썸네일">
-        {% else %}
-        <img src="{% static '노란별.png' %}" alt="기본 썸네일">
-        {% endif %}
-        <h2>
-            <a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a>
-        </h2>
-        <p>관심도: <span id="interest-{{ idea.pk }}">{{ idea.interest }}</span></p>
-        <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="1">+</button>
-        <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="-1">-</button>
-        <button class="like-btn" data-id="{{ idea.pk }}">
-            {% if idea.is_starred %}
-            ★
-            {% else %}
-            ☆
-            {% endif %}
-        </button>
+/* 카드 스타일 */
+.idea-card {
+    max-width: 275px;
+    position: relative;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s;
+    box-sizing: border-box;
+}
+
+.idea-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 찜하기 아이콘 */
+.idea-star {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: gold;
+    z-index: 10;
+}
+
+/* 관심도 조절 */
+.idea-interest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.idea-interest span {
+    margin: 0 10px;
+    font-size: 1.2rem;
+}
+
+.idea-interest button {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.idea-interest button:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* 페이지네이션 */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.pagination-link {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.pagination-link:hover {
+    background-color: #0056b3;
+}
+
+.pagination-info {
+    font-size: 1em;
+    margin: 0 5px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .idea-container {
+        grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
+    }
+}
+
+@media (max-width: 768px) {
+    .idea-container {
+        grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 */
+    }
+}
+
+@media (max-width: 480px) {
+    .idea-container {
+        grid-template-columns: 1fr; /* 한 줄에 1개 */
+    }
+}
+</style>
+
+<div class="idea-list">
+    <h1 class="title">아이디어 관리</h1>
+    <!-- 정렬 옵션 -->
+    <div class="sort-options">
+        <a href="?sort=created_at" class="sort-link">등록순</a>
+        <a href="?sort=likes" class="sort-link">찜하기순</a>
+        <a href="?sort=name" class="sort-link">이름순</a>
+        <a href="?sort=updated_at" class="sort-link">최신순</a>
     </div>
-    {% endfor %}
+
+
+    <!-- 아이디어 목록 -->
+    <div class="idea-container">
+        {% for idea in page_obj %}
+        <div class="idea-card" id="idea-{{ idea.pk }}">
+            <!-- 찜하기 아이콘 -->
+            <span class="idea-star" data-id="{{ idea.pk }}">
+                {% if idea.is_starred %}
+                ★
+                {% else %}
+                ☆
+                {% endif %}
+            </span>
+        
+            <!-- 이미지 -->
+            {% if idea.thumbnail %}
+            <img src="{{ idea.thumbnail.url }}" alt="아이디어 썸네일" class="idea-thumbnail">
+            {% else %}
+            <img src="{% static 'default_thumbnail.png' %}" alt="기본 썸네일" class="idea-thumbnail">
+            {% endif %}
+
+            <!-- 제목 -->
+            <h3>  <a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a></h3>
+            
+            <!-- 예상 개발 도구 -->
+            <p>예상 개발 툴: {{ idea.devtool }}</p>
+
+            <!-- 관심도 조절 -->
+            <div class="idea-interest">
+                <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="-1">-</button>
+                <span id="interest-{{ idea.pk }}">{{ idea.interest }}</span>
+                <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="1">+</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1&sort={{ sort }}" class="pagination-link">처음</a>
+                <a href="?page={{ page_obj.previous_page_number }}&sort={{ sort }}" class="pagination-link">이전</a>
+            {% endif %}
+
+            <span class="pagination-info">페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&sort={{ sort }}" class="pagination-link">다음</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&sort={{ sort }}" class="pagination-link">마지막</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
 
-<!-- 페이지네이션 -->
-<div>
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1&sort={{ sort }}">처음</a>
-            <a href="?page={{ page_obj.previous_page_number }}&sort={{ sort }}">이전</a>
-        {% endif %}
+<!-- JavaScript 추가 -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // 찜하기 기능
+        document.querySelectorAll(".idea-star").forEach(star => {
+            star.addEventListener("click", () => {
+                const ideaId = star.dataset.id;
 
-        <span>페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+                fetch(`/api/idea/${ideaId}/toggle-star/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.is_starred) {
+                        star.textContent = "★";  // 찜 상태 업데이트
+                    } else {
+                        star.textContent = "☆";
+                    }
+                })
+                .catch(err => console.error("찜하기 실패:", err));
+            });
+        });
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}&sort={{ sort }}">다음</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}&sort={{ sort }}">마지막</a>
-        {% endif %}
-    </span>
-</div>
+        // 관심도 조절 기능
+        document.querySelectorAll(".interest-btn").forEach(button => {
+            button.addEventListener("click", () => {
+                const ideaId = button.dataset.id;
+                const adjustment = parseInt(button.dataset.adjustment);
+                const interestSpan = document.getElementById(`interest-${ideaId}`);
+
+                fetch(`/api/idea/${ideaId}/adjust-interest/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: JSON.stringify({ adjustment })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    interestSpan.textContent = data.interest;  // 관심도 업데이트
+                })
+                .catch(err => console.error("관심도 조절 실패:", err));
+            });
+        });
+    });
+</script>
+
 {% endblock %}

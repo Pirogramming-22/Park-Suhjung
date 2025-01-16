@@ -24,6 +24,7 @@ urlpatterns = [
     path('ideas/', include('ideas.urls')),        
     path('devtools/', include('devtools.urls')), 
     path('', lambda request: redirect('idea_list')),
+    path('api/', include('ideas.api_urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

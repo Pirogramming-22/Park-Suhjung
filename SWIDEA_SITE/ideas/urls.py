@@ -14,5 +14,7 @@ urlpatterns = [
     path('wishlist/<int:pk>/', views.toggle_wishlist, name='toggle_wishlist'),
     path('<int:pk>/edit/', views.idea_edit, name='idea_edit'),
     path('<int:pk>/toggle_star/', views.toggle_star, name='toggle_star'),
+    
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

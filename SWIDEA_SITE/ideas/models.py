@@ -22,10 +22,15 @@ class Idea(models.Model):
     thumbnail = models.ImageField(upload_to='ideas/thumbnails/', blank=True, null=True)
     content = models.TextField(default="입력하세요")
     interest = models.PositiveIntegerField(default=0)
+    is_starred = models.BooleanField(default=False)  # 찜 상태
     devtool = models.ForeignKey(DevTool, on_delete=models.CASCADE, related_name='ideas',default=1)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     wishlist = models.BooleanField(default=False)  # 찜 여부 추가
+    @property
+    def likes(self):
+        """찜한 개수를 반환"""
+        return self.stars.count()
     def save(self, *args, **kwargs):
         # 기존 저장 로직
         super().save(*args, **kwargs)
