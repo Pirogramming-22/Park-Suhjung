@@ -27,11 +27,18 @@
     <div>
         <p><strong>내용:</strong> {{ idea.content }}</p>
         <p><strong>관심도:</strong> {{ idea.interest }}</p>
-        <p><strong>개발 도구:</strong> {{ idea.devtool.name }}</p>
+        <p><strong>개발 도구:</strong> <a href="{% url 'devtool_detail' idea.devtool.pk %}">{{ idea.devtool.name }}</a></p>
         <p><strong>찜하기:</strong> 
-            <button id="wishlist-btn" data-id="{{ idea.pk }}">
-                {% if idea.wishlist %} ★ 찜 취소 {% else %} ☆ 찜하기 {% endif %}
-            </button>
+          
+        <span class="idea-star" data-id="{{ idea.pk }}">
+            {% if idea.is_starred %}
+            ★
+            {% else %}
+            ☆
+            {% endif %}
+        </span>
+        
+        
         </p>
         <p><strong>생성일:</strong> {{ idea.created_at }}</p>
         <p><strong>업데이트일:</strong> {{ idea.updated_at }}</p>
@@ -52,23 +59,20 @@
     </div>
 </div>
 <script>
-    // 찜하기 AJAX 처리
-    document.getElementById('wishlist-btn').addEventListener('click', function() {
-        const ideaId = this.getAttribute('data-id');
-        const btn = this;
+    document.addEventListener('DOMContentLoaded', () => {
+        const ideaId = "{{ idea.pk }}";
+        const wishlistBtn = document.getElementById("wishlist-btn");
 
-        fetch(`/ideas/${ideaId}/wishlist/`, {
-            method: 'POST',
-            headers: { 'X-CSRFToken': '{{ csrf_token }}' }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.wishlist) {
-                btn.textContent = '★ 찜 취소';
-            } else {
-                btn.textContent = '☆ 찜하기';
-            }
-        });
+        // localStorage에서 찜 상태 가져오기
+        const isStarred = localStorage.getItem(`wishlist-${ideaId}`);
+
+        // localStorage 상태에 따라 버튼 텍스트 업데이트
+        if (isStarred === "true") {
+            wishlistBtn.textContent = "★";
+        } else if (isStarred === "false") {
+            wishlistBtn.textContent = "☆";
+        }
     });
 </script>
+
 {% endblock %}

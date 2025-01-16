@@ -14,7 +14,7 @@ urlpatterns = [
     path('wishlist/<int:pk>/', views.toggle_wishlist, name='toggle_wishlist'),
     path('<int:pk>/edit/', views.idea_edit, name='idea_edit'),
     path('<int:pk>/toggle_star/', views.toggle_star, name='toggle_star'),
-    
-    
+    path('devtool/<int:pk>/', views.devtool_detail, name='devtool_detail'),  # 개발툴 디테일 페이지
+    path('<int:pk>/wishlist/', views.toggle_wishlist, name='toggle_wishlist'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
