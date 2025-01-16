@@ -14,6 +14,18 @@
         <p><strong>종류:</strong> {{ devtool.kind }}</p>
         <p><strong>설명:</strong> {{ devtool.content }}</p>
     </div>
+    <div class="idea_list">
+        <h2>이 개발 도구를 사용한 아이디어 목록</h2>
+        <ul>
+            {% for idea in ideas %}
+                <li>
+                    <a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a>
+                </li>
+            {% empty %}
+                <p>이 개발 도구를 사용한 아이디어가 없습니다.</p>
+            {% endfor %}
+        </ul>
+    </div>
     <a href="{% url 'devtool_update' devtool.pk %}" class="btn btn-primary">수정</a>
     <form action="{% url 'devtool_delete' devtool.pk %}" method="post" style="display: inline;">
         {% csrf_token %}

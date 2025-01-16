@@ -22,6 +22,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from devtools.models import DevTool
 from devtools.forms import DevToolForm
+from ideas.models import Idea
 
 def devtool_list(request):
     devtools = DevTool.objects.all()
@@ -29,7 +30,8 @@ def devtool_list(request):
 
 def devtool_detail(request, pk):
     devtool = get_object_or_404(DevTool, pk=pk)
-    return render(request, 'devtools/detail.html', {'devtool': devtool})
+    ideas = Idea.objects.filter(devtool=devtool)
+    return render(request, 'devtools/detail.html', {'devtool': devtool, 'ideas': ideas})
 
 def devtool_create(request):
     if request.method == 'POST':
