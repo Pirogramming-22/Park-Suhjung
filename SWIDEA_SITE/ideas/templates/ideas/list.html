@@ -221,29 +221,41 @@
             });
         });
 
+      
         // 관심도 조절 기능
         document.querySelectorAll(".interest-btn").forEach(button => {
-            button.addEventListener("click", () => {
-                const ideaId = button.dataset.id;
-                const adjustment = parseInt(button.dataset.adjustment);
-                const interestSpan = document.getElementById(`interest-${ideaId}`);
+        button.addEventListener("click", () => {
+            const ideaId = button.dataset.id; // 아이디어 ID 가져오기
+            const adjustment = parseInt(button.dataset.adjustment); // 조정 값 가져오기
+            const interestSpan = document.getElementById(`interest-${ideaId}`); // 관심도 표시 요소
 
-                fetch(`/api/idea/${ideaId}/adjust-interest/`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": "{{ csrf_token }}"
-                    },
-                    body: JSON.stringify({ adjustment })
+            // AJAX 요청
+            fetch(`/api/idea/${ideaId}/adjust-interest/`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}" // CSRF 토큰 추가
+                },
+                body: JSON.stringify({ adjustment }) // 조정 값 전송
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("서버 응답 실패");
+                    }
+                    return response.json();
                 })
-                .then(response => response.json())
                 .then(data => {
-                    interestSpan.textContent = data.interest;  // 관심도 업데이트
+                    if (data.interest !== undefined) {
+                        interestSpan.textContent = data.interest; // 관심도 업데이트
+                    } else {
+                        alert("관심도 업데이트 실패");
+                    }
                 })
                 .catch(err => console.error("관심도 조절 실패:", err));
-            });
         });
     });
+    });
 </script>
+
 
 {% endblock %}

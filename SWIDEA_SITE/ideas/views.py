@@ -3,7 +3,9 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from .models import Idea, IdeaStar
 from .forms import IdeaForm
+from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count
+import json
 # Create your views here.
 
 #def idea_list(request):
@@ -74,16 +76,20 @@ def toggle_star(request, pk):
 
         return JsonResponse({'is_starred': is_starred},)
     
+@csrf_exempt
 def adjust_interest(request, pk):
-    idea = get_object_or_404(Idea, pk=pk)
-    adjustment = int(request.POST.get('adjustment', 0))
-    idea.interest += adjustment
-    idea.save()
-
-    return JsonResponse({'interest': idea.interest})
-
-
-#create
+    if request.method == "POST":
+        try:
+            idea = get_object_or_404(Idea, pk=pk)
+            body = json.loads(request.body)  # JSON 데이터 파싱
+            adjustment = int(body.get("adjustment", 0))  # 조정 값 가져오기
+            idea.interest += adjustment  # 관심도 업데이트
+            idea.save()  # 변경 사항 저장
+            return JsonResponse({"interest": idea.interest})  # 업데이트된 관심도 반환
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+    return JsonResponse({"error": "Invalid request method"}, status=405)
+    
 def idea_create(request):
     if request.method == 'POST':
         form = IdeaForm(request.POST, request.FILES)
