@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 네비게이션 바 스타일 */
+        nav {
+            background-color: #007BFF;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: white;
+            color: #007BFF;
+        }
+        
+        /* 페이지 콘텐츠 스타일 */
+        .content {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 기본 링크 스타일 */
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #0056b3;
+        }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            body {
+            font-size: 0.8rem; 
+            }
+        }
+
+        </style>
+        
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SWIDEA_SITE{% endblock %}</title>
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <link rel="stylesheet" href="{% static 'ideas/css/style.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- 네비게이션 바 -->
+    <nav>
+        <ul>
+            <li><a href="/">홈</a></li>
+            <li><a href="{% url 'idea_create' %}">아이디어 등록</a></li>
+            <li><a href="{% url 'idea_list' %}">아이디어 관리</a></li>
+            <li><a href="{% url 'devtool_create' %}">개발 도구 등록</a></li>
+            <li><a href="{% url 'devtool_list' %}">개발 도구 관리</a></li>
+        </ul>
+    </nav>
+
+    <!-- 페이지 콘텐츠 -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- 공통 자바스크립트 -->
+    <script herf="{% static 'ideas/js/script.js' %}"></script>
+</body>
+</html>

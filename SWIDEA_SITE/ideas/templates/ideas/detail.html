@@ -1,0 +1,78 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ idea.title }}{% endblock %}
+
+{% block content %}
+<style>
+    .idea_details{
+        flex-direction:column ;
+        font-size: 0.8rem;
+    }
+</style>
+<div class="idea_details">
+    <h1>{{ idea.title }}</h1>
+
+    <!-- 썸네일 -->
+    <div>
+        {% if idea.thumbnail %}
+        <img src="{{ idea.thumbnail.url }}" alt="{{ idea.title }}" style="width: 300px;">
+        {% else %}
+        <p>이미지 없음</p>
+        {% endif %}
+    </div>
+
+    <!-- 아이디어 정보 -->
+    <div>
+        <p><strong>내용:</strong> {{ idea.content }}</p>
+        <p><strong>관심도:</strong> {{ idea.interest }}</p>
+        <p><strong>개발 도구:</strong> <a href="{% url 'devtool_detail' idea.devtool.pk %}">{{ idea.devtool.name }}</a></p>
+        <p><strong>찜하기:</strong> 
+          
+        <span class="idea-star" data-id="{{ idea.pk }}">
+            {% if idea.is_starred %}
+            ★
+            {% else %}
+            ☆
+            {% endif %}
+        </span>
+        
+        
+        </p>
+        <p><strong>생성일:</strong> {{ idea.created_at }}</p>
+        <p><strong>업데이트일:</strong> {{ idea.updated_at }}</p>
+    </div>
+
+    <!-- 수정 및 삭제 버튼 -->
+    <div>
+        <a href="{% url 'idea_update' idea.pk %}" class="btn btn-primary">수정</a>
+        <form action="{% url 'idea_delete' idea.pk %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">삭제</button>
+        </form>
+    </div>
+
+    <!-- 목록으로 돌아가기 -->
+    <div>
+        <a href="{% url 'idea_list' %}" >목록으로 돌아가기</a>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const ideaId = "{{ idea.pk }}";
+        const wishlistBtn = document.getElementById("wishlist-btn");
+
+        // localStorage에서 찜 상태 가져오기
+        const isStarred = localStorage.getItem(`wishlist-${ideaId}`);
+
+        // localStorage 상태에 따라 버튼 텍스트 업데이트
+        if (isStarred === "true") {
+            wishlistBtn.textContent = "★";
+        } else if (isStarred === "false") {
+            wishlistBtn.textContent = "☆";
+        }
+    });
+</script>
+
+{% endblock %}

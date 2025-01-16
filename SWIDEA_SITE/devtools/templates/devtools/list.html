@@ -1,0 +1,24 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}개발 도구 목록{% endblock %}
+<style>
+    .devtool_list{
+        flex-direction: column;
+    }
+</style>
+{% block content %}
+<div class="devtool_list">
+<h1>개발 도구 목록</h1>
+
+<a href="{% url 'devtool_create' %}" class="btn btn-primary">개발 도구 등록</a>
+
+<ul>
+    {% for devtool in devtools %}
+    <li>
+        <a href="{% url 'devtool_detail' devtool.pk %}">{{ devtool.name }}</a> - {{ devtool.kind }}
+    </li>
+    {% endfor %}
+</ul>
+</div>
+{% endblock %}

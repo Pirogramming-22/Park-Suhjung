@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}개발 도구 등록{% endblock %}
+<style>
+    .devtools_create{
+        flex-direction: column;
+        font-size: 0.8rem;
+        display: flex;
+        
+    }
+
+</style>
+{% block content %}
+<div class="devtools_create">
+    <h1>개발 도구 등록</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">등록</button>
+        <a href="{% url 'devtool_list' %}" class="btn btn-secondary">취소</a>
+    </form>
+</div>
+{% endblock %}

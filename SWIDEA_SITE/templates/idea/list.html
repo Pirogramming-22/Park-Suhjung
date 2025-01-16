@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}아이디어 관리{% endblock %}
+
+{% block content %}
+<h1>아이디어 관리</h1>
+
+<link rel="stylesheet" type="text/css" href="{% static 'ideas/css/style.css' %}">
+<script src="{% static 'ideas/js/script.js' %}" defer></script>
+<!-- 정렬 옵션 -->
+<div>
+    <a href="?sort=created_at">등록순</a>
+    <a href="?sort=likes">찜하기순</a>
+    <a href="?sort=name">이름순</a>
+    <a href="?sort=updated_at">최신순</a>
+</div>
+
+<!-- 아이디어 목록 -->
+<div>
+    {% for idea in page_obj %}
+    <div>
+        <img src="{{ idea.thumbnail.url }}" alt="아이디어 썸네일">
+        <h2>
+            <a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a>
+        </h2>
+        <p>관심도: <span id="interest-{{ idea.pk }}">{{ idea.interest }}</span></p>
+        <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="1">+</button>
+        <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="-1">-</button>
+        <button class="like-btn" data-id="{{ idea.pk }}">
+            {% if user in idea.ideastar_set.values_list('user', flat=True) %}
+            ★
+            {% else %}
+            ☆
+            {% endif %}
+        </button>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- 페이지네이션 -->
+<div>
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1&sort={{ sort }}">처음</a>
+            <a href="?page={{ page_obj.previous_page_number }}&sort={{ sort }}">이전</a>
+        {% endif %}
+
+        <span>페이지 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&sort={{ sort }}">다음</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&sort={{ sort }}">마지막</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
