@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.content }}</p>
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+        {% endif %}
+        <div>
+            <button id="like-button">👍 Like</button>
+            <span id="like-count">{{ post.like }}</span>
+        </div>
+
+        <h2>Comments</h2>
+        <ul id="comment-list">
+            {% for comment in comments %}
+            <li id="comment-{{ comment.id }}">
+                <strong>{{ comment.user.username }}</strong>: {{ comment.content }}
+                {% if comment.user == request.user %}
+                <button class="delete-comment" data-id="{{ comment.id }}">Delete</button>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+
+        <form id="comment-form">
+            {% csrf_token %}
+            <textarea id="comment-content" placeholder="Add a comment..."></textarea>
+            <button type="submit">Post Comment</button>
+        </form>
+    </div>
+
+    <script>
+        // 좋아요 증가 AJAX
+        document.getElementById('like-button').addEventListener('click', function() {
+            const postId = "{{ post.id }}";
+            fetch("{% url 'main:like_post' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `post_id=${postId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('like-count').textContent = data.likes;
+            });
+        });
+
+        // 댓글 작성 AJAX
+        document.getElementById('comment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const content = document.getElementById('comment-content').value;
+            const postId = "{{ post.id }}";
+
+            fetch("{% url 'main:add_comment' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `post_id=${postId}&content=${content}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    const commentList = document.getElementById('comment-list');
+                    const newComment = document.createElement('li');
+                    newComment.innerHTML = 
+                    `<strong>${data.user}</strong>: ${data.content};
+                    <button class="delete-comment" data-id="${data.comment_id}">Delete</button>`;
+                    commentList.appendChild(newComment);
+                    document.getElementById('comment-content').value = ''; // 댓글 입력 필드 초기화
+                }
+            });
+        });
+        //삭제
+        document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('delete-comment')) {
+            const commentId = event.target.dataset.id;
+
+            fetch(`/post/comment/delete/${commentId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // 댓글 목록에서 해당 댓글 제거
+                    const commentElement = document.getElementById(`comment-${commentId}`);
+                    if (commentElement) {
+                        commentElement.remove();
+                    }
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
