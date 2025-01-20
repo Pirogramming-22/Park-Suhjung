@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ idea.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ idea.title }}</h1>
+
+<!-- 썸네일 -->
+<div>
+    {% if idea.thumbnail %}
+    <img src="{{ idea.thumbnail.url }}" alt="{{ idea.title }}" style="width: 300px;">
+    {% else %}
+    <p>이미지 없음</p>
+    {% endif %}
+</div>
+
+<!-- 아이디어 정보 -->
+<div>
+    <p><strong>내용:</strong> {{ idea.content }}</p>
+    <p><strong>관심도:</strong> {{ idea.interest }}</p>
+    <p><strong>개발 도구:</strong> {{ idea.devtool.name }}</p>
+    <p><strong>찜하기:</strong> 
+        <button id="wishlist-btn" data-id="{{ idea.pk }}">
+            {% if idea.wishlist %} ★ 찜 취소 {% else %} ☆ 찜하기 {% endif %}
+        </button>
+    </p>
+    <p><strong>생성일:</strong> {{ idea.created_at }}</p>
+    <p><strong>업데이트일:</strong> {{ idea.updated_at }}</p>
+</div>
+
+<!-- 수정 및 삭제 버튼 -->
+<div>
+    <a href="{% url 'idea_edit' idea.pk %}" class="btn btn-primary">수정</a>
+    <form action="{% url 'idea_delete' idea.pk %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">삭제</button>
+    </form>
+</div>
+
+<!-- 목록으로 돌아가기 -->
+<div>
+    <a href="{% url 'idea_list' %}" class="btn btn-secondary">목록으로 돌아가기</a>
+</div>
+
+<script>
+    // 찜하기 AJAX 처리
+    document.getElementById('wishlist-btn').addEventListener('click', function() {
+        const ideaId = this.getAttribute('data-id');
+        const btn = this;
+
+        fetch(`/ideas/${ideaId}/wishlist/`, {
+            method: 'POST',
+            headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.wishlist) {
+                btn.textContent = '★ 찜 취소';
+            } else {
+                btn.textContent = '☆ 찜하기';
+            }
+        });
+    });
+</script>
+{% endblock %}
