@@ -30,9 +30,7 @@
   .star.active {
     color: gold; /* 선택된 색상 */
   }
-.content{
-    display: flex;
-}
+
 
   /* 아이디어리스트*/
   /* Global Styles */
@@ -42,7 +40,6 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
- 
 }
 
 h1.title {

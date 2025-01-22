@@ -5,8 +5,6 @@
 {% block content %}
 <h1>아이디어 관리</h1>
 
-<link rel="stylesheet" type="text/css" href="{% static 'ideas/css/style.css' %}">
-<script src="{% static 'ideas/js/script.js' %}" defer></script>
 <!-- 정렬 옵션 -->
 <div>
     <a href="?sort=created_at">등록순</a>
@@ -27,7 +25,7 @@
         <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="1">+</button>
         <button class="interest-btn" data-id="{{ idea.pk }}" data-adjustment="-1">-</button>
         <button class="like-btn" data-id="{{ idea.pk }}">
-            {% if is_starred %}
+            {% if user in idea.ideastar_set.values_list('user', flat=True) %}
             ★
             {% else %}
             ☆

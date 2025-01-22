@@ -1,0 +1,54 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Post List{% endblock %}
+{% load static %}
+
+{% block content %}
+<section class="profile">
+    <div class="profile__image">
+        <img src="{% static 'assets/images/profilePicture.png' %}" alt="프로필 사진" />
+    </div>
+    <div class="profile__data">
+        <div class="profile__data-item">
+            <div class="profile__data-number">1,234</div>
+            <div class="profile__data-type">Posts</div>
+        </div>
+        <div class="profile__data-item">
+            <div class="profile__data-number">5,678</div>
+            <div class="profile__data-type">Followers</div>
+        </div>
+        <div class="profile__data-item">
+            <div class="profile__data-number">9,101</div>
+            <div class="profile__data-type">Following</div>
+        </div>
+    </div>
+</section>
+
+<section class="userInfo">
+    <div>
+        <div class="userInfo__username">Pirogramming</div>
+        <div class="userInfo__category">컴퓨터 회사</div>
+        <div class="userInfo__description">
+            프로그래밍의 첫 걸음, 피로그래밍
+        </div>
+    </div>
+    <button class="userInfo__follow">Follow</button>
+</section>
+
+<section class="posts">
+    <nav class="posts__tabBar">
+        <div class="posts__tab posts__tab--selected">posts</div>
+        <div class="posts__tab">tag</div>
+     
+    </nav>
+    <article class="posts__contents">
+        {% for post in posts %}
+        <div >
+            <a href="{% url 'main:post_detail' post.id %}" class="posts__photo">
+                <img src="{{ post.image.url }}" alt="게시물 이미지" />
+            </a>
+        </div>
+        {% endfor %}
+    </article>
+</section>
+{% endblock %}

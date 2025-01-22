@@ -70,11 +70,11 @@ def toggle_star(request, pk):
         starred, created = IdeaStar.objects.get_or_create(idea=idea, user=request.user)
         if not created:
             starred.delete()
-            is_starred = False
+            starred.is_starred = False
         else:
-            is_starred = True
-
-        return JsonResponse({'is_starred': is_starred},)
+            starred.is_starred = True
+       
+        return JsonResponse({'is_starred': starred.is_starred})
     
 @csrf_exempt
 def adjust_interest(request, pk):
@@ -89,7 +89,7 @@ def adjust_interest(request, pk):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
     return JsonResponse({"error": "Invalid request method"}, status=405)
-    
+
 def idea_create(request):
     if request.method == 'POST':
         form = IdeaForm(request.POST, request.FILES)
@@ -102,11 +102,12 @@ def idea_create(request):
 
 
 def idea_detail(request, pk): 
-    idea = get_object_or_404(Idea, pk=pk) 
-    return render(request, 'ideas/detail.html', {'idea': idea})
+    idea = get_object_or_404(Idea, pk=pk)
+    is_starred = IdeaStar.objects.filter(idea=idea, user=request.user).exists() 
+    return render(request, 'ideas/detail.html', {'idea': idea,'is_starred': is_starred})
 def devtool_detail(request, pk):
     devtool = get_object_or_404(DevTool, pk=pk)
-    return render(request, 'ideas/devtool_detail.html', {'devtool': devtool})
+    return render(request, 'ideas/devtool_detail.html', {'devtool': devtool,})
 
 def idea_edit(request, pk): 
     idea = get_object_or_404(Idea, pk=pk) 

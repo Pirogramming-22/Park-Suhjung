@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Likes{% endblock %}
+{% load static %}
+
+{% block content %}
+<section class="highlights">
+    <h1>Likes</h1>
+    <ul>
+        {% for like in likes %}
+        <li class="highlights__item">
+            <button class="highlights__item-image">
+                <img src="../../static/assets/images/profilePicture.png" alt="하이라이트 보기" />
+            </button>
+            <div class="highlights_item-title">{{ like.profile.username }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
